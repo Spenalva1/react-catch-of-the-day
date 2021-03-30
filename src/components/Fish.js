@@ -1,7 +1,19 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import {formatPrice} from '../helpers';
 
 class Fish extends React.Component {
+    static propTypes = {
+        fish: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired,
+            desc: PropTypes.string.isRequired,
+            status: PropTypes.string.isRequired,
+            price: PropTypes.number.isRequired
+        }).isRequired,
+        addToOrder: PropTypes.func.isRequired,
+        id: PropTypes.string.isRequired,
+    };
 
     addToOrder = () => {
         this.props.addToOrder(this.props.id)
@@ -24,4 +36,4 @@ class Fish extends React.Component {
     }
 }
 
-export default Fish
+export default Fish;

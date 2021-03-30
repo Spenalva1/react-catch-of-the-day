@@ -1,30 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { formatPrice } from '../helpers'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 
 class Order extends React.Component {
 
+
     renderOrder = key => {
+        const transitionOpts  = {
+            classNames: "order",
+            key,
+            timeout: {enter: 500, exit: 500}
+        }
 
         if(this.props.fishes[key] && this.props.fishes[key].status === 'available') {
             return (
-                <li key={key}>
-                    <span>
-                        <span className="count">
-                            {this.props.order[key]}
+                <CSSTransition {...transitionOpts}>
+                    <li key={key}>
+                        <span>
+                            <TransitionGroup component="span" className="count">
+                                <CSSTransition classNames="count" key={this.props.order[key]} timeout={{enter:500, exit:500}}>
+                                    <span>
+                                        {this.props.order[key]}
+                                    </span>
+                                </CSSTransition>
+                            </TransitionGroup>
+                            lbs {this.props.fishes[key].name  }
+                            <button onClick={() => this.props.deleteFromOrder(key)}>&times;</button>
                         </span>
-                        lbs {this.props.fishes[key].name  }
-                        <button onClick={() => this.props.deleteFromOrder(key)}>&times;</button>
-                    </span>
-                    <span className="price">{formatPrice(this.props.fishes[key].price * this.props.order[key])}</span>
-                </li>);
+                        <span className="price">{formatPrice(this.props.fishes[key].price * this.props.order[key])}</span>
+                    </li>
+                </CSSTransition>
+            );
         }
         if (!this.props.fishes[key]) {
             return null
         }
         return (
-            <li key={key}>
-                Sorry, {this.props.fishes[key] ? this.props.fishes[key].name : 'fish'} is no longer available
-            </li>
+            <CSSTransition {...transitionOpts}>
+                <li key={key}>
+                    Sorry, {this.props.fishes[key] ? this.props.fishes[key].name : 'fish'} is no longer available
+                </li>
+            </CSSTransition>
         );
     }
 
@@ -38,9 +55,9 @@ class Order extends React.Component {
         return (
             <div className="order-wrap">
                 <h2>Order</h2>
-                <ul className="order">
+                <TransitionGroup component="ul" className="order">
                     {Object.keys(this.props.order).map(this.renderOrder)}
-                </ul>
+                </TransitionGroup>
                 <div className="total">
                     Total:
                     <strong>{formatPrice(total)}</strong>
@@ -50,4 +67,10 @@ class Order extends React.Component {
     }
 }
 
-export default Order
+Order.propTypes = {
+    fishes: PropTypes.object.isRequired,
+    order: PropTypes.object.isRequired,
+    deleteFromOrder: PropTypes.func.isRequired,
+};
+
+export default Order;
