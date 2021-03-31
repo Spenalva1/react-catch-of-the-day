@@ -334,6 +334,7 @@ header.top h3:after {
   transition: all 0.3s;
   box-shadow: 0 5px 5px rgba(0,0,0,0.1);
   overflow: scroll;
+  overflow-x: hidden;
 }
 .catch-of-the-day > *:first-child {
   flex-shrink: 1;
@@ -579,7 +580,9 @@ input[type=submit].github,
 button.facebook,
 input[type=submit].facebook,
 button.twitter,
-input[type=submit].twitter {
+input[type=submit].twitter,
+button.google,
+input[type=submit].google {
   border: 0;
   display: block;
   margin-bottom: 2rem;
@@ -602,6 +605,14 @@ input[type=submit].facebook {
 button.facebook:after,
 input[type=submit].facebook:after {
   background: #2d5082;
+}
+button.google,
+input[type=submit].google {
+  background: #db4437;
+}
+button.google:after,
+input[type=submit].google:after {
+  background: #ba2e21;
 }
 button.twitter,
 input[type=submit].twitter {

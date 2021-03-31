@@ -68,6 +68,7 @@ header.top
     transition all 0.3s
     box-shadow 0 5px 5px rgba(0,0,0,0.1)
     overflow scroll
+    overflow-x hidden
     &:first-child
       flex-shrink 1 // take 4x the extra room
       flex-basis 50%
@@ -259,7 +260,7 @@ button, input[type=submit]
     &:after
       background green
 
-  &.github, &.facebook, &.twitter
+  &.github, &.facebook, &.twitter, &.google
     border 0
     display block
     margin-bottom 2rem
@@ -276,6 +277,11 @@ button, input[type=submit]
     background #3864A3
     &:after
       background darken(#3864A3, 20%)
+
+  &.google
+    background #DB4437
+    &:after
+      background darken(#DB4437, 20%)
 
   &.twitter
     background #5EA9DD
