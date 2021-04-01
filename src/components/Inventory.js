@@ -27,6 +27,7 @@ class Inventory extends React.Component {
             await base.post(`${this.props.storeId}/owner`, {
                 data: authData.user.uid
             });
+            store.owner = authData.user.uid;
         }
         this.setState({
             uid: authData.user.uid,
